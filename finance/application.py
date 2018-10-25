@@ -318,7 +318,7 @@ def sell():
                             quantity= -sharessold, \
                             id=session['user_id'])
 
-        flash('$$ Makin bank! $$ You Sold Some Stocks!')
+        flash('You Sold Some Stocks!')
 
         return redirect("/")
     else:
@@ -337,7 +337,7 @@ def myaccount():
 def changepassword():
     """Update user settings"""
 
-    # User reached route via POST (as by submitting a form via POST)
+    # User reached route via POST
     if request.method == "POST":
 
         # Ensure password was submitted
@@ -396,6 +396,7 @@ def deposit():
             db.execute("UPDATE users SET cash = cash + :newcash WHERE id=:id", \
                     newcash = float(deposit), id=session["user_id"])
 
+        # Return error if amount is not valid
         else:
             flash("Enter a valid amount")
             return render_template("deposit.html")
